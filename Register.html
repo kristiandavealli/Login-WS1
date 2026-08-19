@@ -13,7 +13,7 @@
 
     <div class="card">
 
-        <div class="profile-avatar" aria-hidden="true"></div>
+        <img src="Adidas.jpeg" alt="Profile Picture">
 
         <h2>Create Account</h2>
 
@@ -21,6 +21,12 @@
 
             <label for="username">Username</label>
             <input type="text"id="username"placeholder="Enter username"required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter phone number" required>
+
+            <label for="address">Address</label>
+            <input type="text" id="address" placeholder="Enter address" required>
 
             <label for="password">Password</label>
             <input type="password" id="password" placeholder="Enter password" required>
@@ -34,7 +40,7 @@
 
         </form>
 
-        <p id="message"></p>
+        <p id="message" aria-live="polite"></p>
 
         <div class="links">
             <a href="LoginForm.html">
