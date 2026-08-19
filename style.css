@@ -10,9 +10,7 @@ body{
     justify-content:center;
     align-items:center;
     min-height:100vh;
-    background:
-        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-        url("suns.avif") no-repeat center center;
+    background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url("suns.avif") no-repeat center center;
     background-size: cover;
 }
 
