@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Campus Portal | Login</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-<main class="auth-shell">
-    <section class="login-box" aria-labelledby="login-title">
-    <img src="Adidas.jpeg" alt="Profile Picture">
-    <form id="loginForm">
-        <label for="username">Username</label>
-        <input id="username" type="text" placeholder="Enter your username" required>
-        <label for="password">Password</label>
-        <input id="password" type="password" placeholder="Enter your password" required>
-        <button type="submit">Login to dashboard</button>
-    </form>
-    <p id="loginMessage" class="error" aria-live="polite"></p>
-    <a href="Register.html" class="register">Create a new account</a>
-</section>
-</main>
-
+    <main class="container">
+        <section class="card">
+            <h2>Admin Login</h2>
+            <form action="admin_login.php" method="post">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" required>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" required>
+                <button type="submit">Login to Admin Dashboard</button>
+            </form>
+        </section>
+    </main>
 </body>
 </html>
