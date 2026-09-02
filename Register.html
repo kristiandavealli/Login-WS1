@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Register.css">
 </head>
 <body>
     <main class="container">
@@ -13,18 +14,20 @@
             <h2>Create Account</h2>
             <form action="register.php" method="post">
                 <label for="username">Username</label>
-                <input id="username" name="username" type="text" required>
+                <input id="username"name="username"type="text"required>
                 <label for="address">Address</label>
-                <input id="address" name="address" type="text" maxlength="255" required>
+                <input id="address"name="address"type="text"maxlength="255"required>
                 <label for="contact_number">Contact Number</label>
-                <input id="contact_number" name="contact_number" type="tel" maxlength="30" required>
+                <input id="contact_number"name="contact_number"type="tel"maxlength="30"required>
                 <label for="password">Password</label>
-                <input id="password" name="password" type="password" required>
-                <label for="confirm_password">Confirm password</label>
-                <input id="confirm_password" name="confirm_password" type="password" required>
+                <input id="password"name="password"type="password"required>
+                <label for="confirm_password">Confirm Password</label>
+                <input id="confirm_password"name="confirm_password"type="password"required>
                 <button type="submit">Register</button>
             </form>
-            <nav class="links"><a href="loginForm.html">Already have an account? Login</a></nav>
+            <nav class="links">
+                <a href="LoginForm.html">Already have an account? Login</a>
+            </nav>
         </section>
     </main>
 </body>
