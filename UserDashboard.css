@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+body {
+    color: #333333;
+    background: #f8fafc;
+}
+.user-page {
+    background: #f8fafc;
+}
+.user-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 8%;
+    background: #ffffff;
+    border-bottom: 1px solid #dddddd;
+}
+.user-header h2 {
+    margin: 0;
+    color: #1e3a8a;
+}
+.user-header nav {
+    display: flex;
+    gap: 18px;
+}
+.user-header a {
+    color: #444444;
+    font-size: 14px;
+    text-decoration: none;
+}
+.user-header a:hover {
+    color: #1e3a8a;
+}
+.user-main {
+    max-width: 900px;
+    margin: auto;
+    padding: 35px 20px;
+}
+.welcome-banner {
+    margin-bottom: 30px;
+    padding: 35px;
+    border-radius: 8px;
+    background: #dbeafe;
+    text-align: left;
+}
+.welcome-banner p {
+    color: #1e3a8a;
+    font-size: 12px;
+    font-weight: bold;
+}
+.welcome-banner h1 {
+    margin: 10px 0;
+}
+.welcome-banner span {
+    color: #666666;
+}
+.shop-card {
+    display: flex;
+    gap: 25px;
+    padding: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    background: #ffffff;
+}
+.shop-card img {
+    width: 240px;
+    height: 220px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+.shop-card h3 {
+    margin-top: 15px;
+}
+.shop-card p {
+    color: #666666;
+}
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+.products-grid .shop-card {
+    display: block;
+}
+.products-grid .shop-card img {
+    width: 100%;
+    height: 200px;
+}
+.cart-box {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+}
+@media (max-width: 600px) {
+    .user-header {
+        padding: 15px 20px;
+    }
+    .user-header nav {
+        gap: 10px;
+    }
+    .user-header nav a {
+        font-size: 12px;
+    }
+    .welcome-banner {
+        padding: 30px 20px;
+    }
+    .shop-card {
+        flex-direction: column;
+    }
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    .shop-card img {
+        width: 100%;
+        height: 220px;
+    }
+}
