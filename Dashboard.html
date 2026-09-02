@@ -6,28 +6,17 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="dashboard">
-        <h1>Admin Dashboard</h1>
-        <p>Welcome, Admin!</p>
-
-        <hr>
-
-        <h3>Menu</h3>
-        <p>Home</p>
-        <p>Manage Shipments</p>
-        <p>Manage Customers</p>
-        <p>Manage Products</p>
-        <p>Reports</p>
-
-        <hr>
-
-        <h3>Shipping Summary</h3>
-        <p>Pending Shipments: 12</p>
-        <p>Out for Delivery: 25</p>
-        <p>Delivered Today: 48</p>
-
-        <a href="LoginForm.html"><button class="logout-btn">Logout</button></a>
-    </div>
+<body class="admin-page">
+    <header class="header"><h2>Marketly Admin</h2><a href="logout.php">Logout</a></header>
+    <main class="main admin-main">
+        <nav class="menu"><a class="active" href="#summary">Dashboard</a><a href="#orders">Orders</a><a href="#products">Products</a><a href="#users">Users</a><a href="logout.php">Logout</a></nav>
+        <section class="content" id="summary">
+            <h1>Admin Dashboard</h1><p class="subtitle">Welcome back! Here is your shop summary.</p>
+            <div class="cards"><div class="card"><p>Total Sales</p><h2>$0.00</h2></div><div class="card"><p>Orders</p><h2>0</h2></div><div class="card"><p>Products</p><h2>0</h2></div></div>
+            <section class="box" id="orders"><h2>Orders</h2><p class="empty-message">No orders yet.</p></section>
+            <section class="box" id="products"><h2>Products</h2><p class="empty-message">No products available yet.</p></section>
+            <section class="box" id="users"><h2>Users</h2><p class="empty-message">No user accounts available yet.</p></section>
+        </section>
+    </main>
 </body>
 </html>
