@@ -1,56 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register</title>
-
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="container">
-
-    <div class="card">
-
-        <img src="Adidas.jpeg" alt="Profile Picture">
-
-        <h2>Create Account</h2>
-
-        <form id="registerForm">
-
-            <label for="username">Username</label>
-            <input type="text"id="username"placeholder="Enter username"required>
-
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" placeholder="Enter phone number" required>
-
-            <label for="address">Address</label>
-            <input type="text" id="address" placeholder="Enter address" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter password" required>
-
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" placeholder="Confirm password" required>
-
-            <button type="submit">
-                Register
-            </button>
-
-        </form>
-
-        <p id="message" aria-live="polite"></p>
-
-        <div class="links">
-            <a href="LoginForm.html">
-                Already have an account? Login
-            </a>
-        </div>
-
-    </div>
-
-</div>
-
+    <main class="container">
+        <section class="card">
+            <div class="profile-circle"></div>
+            <h2>Create Account</h2>
+            <form action="register.php" method="post">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" required>
+                <label for="address">Address</label>
+                <input id="address" name="address" type="text" maxlength="255" required>
+                <label for="contact_number">Contact Number</label>
+                <input id="contact_number" name="contact_number" type="tel" maxlength="30" required>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" required>
+                <label for="confirm_password">Confirm password</label>
+                <input id="confirm_password" name="confirm_password" type="password" required>
+                <button type="submit">Register</button>
+            </form>
+            <nav class="links"><a href="loginForm.html">Already have an account? Login</a></nav>
+        </section>
+    </main>
 </body>
 </html>
