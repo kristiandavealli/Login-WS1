@@ -1,205 +1,536 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+/* =========================================================
+   SHOPPING SYSTEM - MAIN CSS
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url("suns.avif") no-repeat center center;
-    background-size: cover;
+body {
+    color: #333333;
+    background: #f4f6f8;
 }
 
-.container{
-    width:100%;
-    max-width:350px;
-    padding:20px;
+/* =========================================================
+   LOGIN / REGISTER
+   ========================================================= */
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    background: linear-gradient(135deg, #eef2ff, #f8fafc);
 }
 
-.card,
-.login-box{
-    width:100%;
-    max-width:350px;
-    background: #ddd;
-    padding:32px;
-    border-radius:15px;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-    text-align:center;
-    animation:fadeIn .5s ease;
+.container .card {
+    width: 100%;
+    max-width: 420px;
+    padding: 35px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+    text-align: center;
 }
 
-.profile{
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    object-fit:cover;
-    margin-bottom:20px;
-    border:4px solid cyan;
+.container .card h2 {
+    margin-bottom: 25px;
+    color: #1e3a8a;
+    font-size: 28px;
 }
 
-.profile-avatar{
-    width:92px;
-    height:92px;
-    margin:0 auto 18px;
-    border:3px solid cyan;
-    border-radius:50%;
+.profile-circle {
+    width: 82px;
+    height: 82px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    border: 2px solid #1e3a8a;
+    background: #ffffff;
 }
 
-h2{
-    margin-bottom:18px;
-    color:#333;
-    font-size:24px;
+.container .card form {
+    width: 100%;
 }
 
-.form-intro{
-    color:#555;
-    font-size:14px;
-    line-height:1.5;
-    margin:-8px 0 18px;
+.container .card label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    text-align: left;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
 }
 
-label{
-    display:block;
-    text-align:left;
-    margin:12px 0 6px;
-    color:#444;
-    font-size:14px;
-    font-weight:bold;
+.container .card input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    outline: none;
+    background: #ffffff;
+    color: #1f2937;
+    font-size: 15px;
+    transition: 0.2s ease;
 }
 
-input{
-    width:100%;
-    padding:12px;
-    border:1px solid  #ddd;
-    border-radius:8px;
-    font-size:15px;
-    outline:none;
-    transition:.3s;
+.container .card input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
-input:focus{
-    border-color: #ddd;
-    box-shadow:0 0 8px rgba(37,99,235,.2);
+.container .card button {
+    width: 100%;
+    margin-top: 22px;
+    padding: 13px 15px;
+    border: none;
+    border-radius: 9px;
+    background: #1e3a8a;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
 
-button{
-    width:100%;
-    padding:12px;
-    margin-top:18px;
-    border:none;
-    border-radius:8px;
-    background:#2563eb;
-    color: #ddd;
-    font-size:16px;
-    cursor:pointer;
-    transition:.3s;
+.container .card button:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
 }
 
-.register{
-    display:inline-block;
-    margin-top:20px;
-    color:#2563eb;
-    font-size:14px;
-    text-decoration:none;
+.container .links {
+    margin-top: 18px;
 }
 
-.register:hover{
-    text-decoration:underline;
+.container .links a {
+    color: #2563eb;
+    font-size: 14px;
+    text-decoration: none;
 }
 
-button:hover{
-    background:#1d4ed8;
-    transform:translateY(-2px);
+.container .links a:hover {
+    text-decoration: underline;
 }
 
-button:active{
-    transform:scale(.98);
+.container .error {
+    margin: 10px 0 15px;
+    padding: 10px;
+    border-radius: 7px;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-size: 14px;
 }
 
-.links{
-    margin-top:20px;
+/* General form note */
+.form-note {
+    color: #666666;
+    font-size: 14px;
 }
 
-.links a{
-    display:block;
-    margin-top:10px;
-    text-decoration:none;
-    color:#2563eb;
-    font-size:14px;
+
+/* =========================================================
+   GENERAL BUTTONS
+   ========================================================= */
+
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 7px;
+    background: #1e3a8a;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.links a:hover{
-    text-decoration:underline;
+.button:hover {
+    background: #2563eb;
 }
 
-.success{
-    color:#16a34a;
-    font-size:14px;
-    margin-top:10px;
+
+/* =========================================================
+   HOME PAGE
+   ========================================================= */
+
+.home-page {
+    background: #f4f6f8;
 }
 
-.error{
-    color:#dc2626;
-    font-size:14px;
-    margin-top:10px;
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 10%;
+    background: #1e3a8a;
+    color: #ffffff;
 }
 
-.dashboard{
-    width:90%;
-    max-width:700px;
-    background: #ddd;
-    padding:40px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-    animation:fadeIn .5s ease;
+.home-header h2 {
+    margin: 0;
 }
 
-.dashboard h1{
-    color:#2563eb;
-    margin-bottom:15px;
+.home-header a {
+    margin-left: 15px;
+    color: #ffffff;
+    text-decoration: none;
 }
 
-.dashboard p{
-    margin-bottom:30px;
-    color:#555;
-    font-size:18px;
+.home-main {
+    max-width: 700px;
+    margin: 90px auto;
+    padding: 40px;
+    border-radius: 12px;
+    background: #ffffff;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
-.logout-btn{
-    width:180px;
-    background:#dc2626;
+.home-main h1 {
+    margin-top: 0;
 }
 
-.logout-btn:hover{
-    background:#b91c1c;
+.light-button {
+    margin-left: 8px;
+    background: #777777;
 }
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
+
+/* =========================================================
+   ADMIN DASHBOARD
+   ========================================================= */
+
+.admin-page {
+    background: #f4f6f8;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 8%;
+    background: #1e3a8a;
+    color: #ffffff;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.header a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.main {
+    display: flex;
+    min-height: calc(100vh - 60px);
+}
+
+.menu {
+    width: 180px;
+    padding: 20px;
+    background: #ffffff;
+}
+
+.menu a {
+    display: block;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #333333;
+    text-decoration: none;
+}
+
+.menu a:hover,
+.menu .active {
+    background: #dbeafe;
+    color: #1e3a8a;
+}
+
+.content {
+    width: 100%;
+    max-width: 1000px;
+    padding: 30px;
+}
+
+.content h1 {
+    margin-top: 0;
+}
+
+.subtitle {
+    color: #666666;
+}
+
+.cards {
+    display: flex;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+/*
+   Specific rule so .cards .card does not affect
+   the registration card styling.
+*/
+.cards .card {
+    flex: 1;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: none;
+    text-align: left;
+}
+
+.cards p,
+.cards h2 {
+    margin: 0;
+}
+
+.cards h2 {
+    margin-top: 10px;
+    color: #1e3a8a;
+}
+
+.box {
+    margin-top: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+.box h2 {
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+}
+
+.product-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.product-row img {
+    width: 140px;
+    height: 140px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.product-row h3 {
+    margin: 8px 0;
+}
+
+.product-row p {
+    color: #666666;
+}
+
+.empty-message {
+    padding: 15px;
+    color: #777777;
+    text-align: center;
+}
+
+
+/* =========================================================
+   USER / ONLINE SHOP
+   ========================================================= */
+
+.user-page {
+    background: #f8fafc;
+}
+
+.user-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 10%;
+    background: #ffffff;
+    border-bottom: 1px solid #dddddd;
+}
+
+.user-header h2 {
+    margin: 0;
+    color: #1e3a8a;
+}
+
+.user-header nav {
+    display: flex;
+    gap: 18px;
+}
+
+.user-header a {
+    color: #444444;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.user-main {
+    max-width: 900px;
+    margin: auto;
+    padding: 35px 20px;
+}
+
+.welcome-banner {
+    margin-bottom: 35px;
+    padding: 45px;
+    border-radius: 10px;
+    background: #dbeafe;
+}
+
+.welcome-banner p {
+    color: #1e3a8a;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.welcome-banner h1 {
+    margin: 10px 0;
+}
+
+.welcome-banner span,
+.shop-card p {
+    color: #666666;
+}
+
+.shop-card {
+    display: flex;
+    gap: 25px;
+    padding: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.products-grid .shop-card {
+    display: block;
+}
+
+.products-grid .shop-card img {
+    width: 100%;
+    height: 200px;
+}
+
+.shop-card img {
+    width: 240px;
+    height: 220px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.shop-card h3 {
+    margin-top: 20px;
+}
+
+.cart-box {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 18px;
     }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
 
-@media(max-width:480px){
-
-    .card,
-    .login-box{
-        padding:25px;
+    .container .card {
+        padding: 25px 20px;
     }
 
-    .dashboard{
-        width:95%;
-        padding:25px;
+    .container .card h2 {
+        font-size: 24px;
     }
 
+    .header {
+        padding: 15px 20px;
+    }
+
+    .main,
+    .cards,
+    .product-row {
+        flex-direction: column;
+    }
+
+    .menu {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .cards .card {
+        width: 100%;
+    }
+
+    .product-row img {
+        width: 100%;
+        height: 200px;
+    }
+
+    .user-header {
+        padding: 15px 20px;
+    }
+
+    .home-header {
+        padding: 15px 20px;
+    }
+
+    .home-header a {
+        margin-left: 8px;
+        font-size: 12px;
+    }
+
+    .user-header nav {
+        gap: 10px;
+    }
+
+    .user-header nav a {
+        font-size: 12px;
+    }
+
+    .welcome-banner {
+        padding: 30px 20px;
+    }
+
+    .shop-card {
+        flex-direction: column;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .shop-card img {
+        width: 100%;
+        height: 220px;
+    }
 }
