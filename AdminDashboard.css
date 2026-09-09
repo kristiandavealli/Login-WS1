@@ -1,16 +1,33 @@
+/* =========================================================
+   MARKETLY - ADMIN DASHBOARD
+   ========================================================= */
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
 }
+
 body {
     color: #333333;
     background: #f4f6f8;
 }
+
+
+/* =========================================================
+   ADMIN PAGE
+   ========================================================= */
+
 .admin-page {
     background: #f4f6f8;
 }
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
 .header {
     display: flex;
     align-items: center;
@@ -19,26 +36,41 @@ body {
     background: #1e3a8a;
     color: #ffffff;
 }
+
 .header h2 {
     margin: 0;
 }
+
 .header a {
     color: #ffffff;
     text-decoration: none;
 }
+
 .header a:hover {
     text-decoration: underline;
 }
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
 .main {
     display: flex;
     min-height: calc(100vh - 60px);
 }
+
+
+/* =========================================================
+   SIDEBAR MENU
+   ========================================================= */
+
 .menu {
     width: 180px;
     padding: 20px;
     background: #ffffff;
-    border-right: 1px solid #dddddd;
 }
+
 .menu a {
     display: block;
     margin-bottom: 8px;
@@ -47,94 +79,122 @@ body {
     color: #333333;
     text-decoration: none;
 }
+
 .menu a:hover,
 .menu .active {
     background: #dbeafe;
     color: #1e3a8a;
 }
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
 .content {
     width: 100%;
     max-width: 1000px;
     padding: 30px;
 }
+
 .content h1 {
     margin-top: 0;
-    margin-bottom: 5px;
 }
+
 .subtitle {
+    margin-top: 8px;
     color: #666666;
 }
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
 .cards {
     display: flex;
     gap: 15px;
     margin: 25px 0;
 }
+
 .cards .card {
     flex: 1;
     padding: 20px;
     background: #ffffff;
     border-radius: 8px;
-    border: 1px solid #dddddd;
+    box-shadow: none;
     text-align: left;
 }
-.cards .card p {
-    margin-bottom: 8px;
-    color: #333333;
-}
-.cards .card h2 {
+
+.cards p,
+.cards h2 {
     margin: 0;
-    color: #000000;
 }
+
+.cards h2 {
+    margin-top: 10px;
+    color: #1e3a8a;
+}
+
+
+/* =========================================================
+   DASHBOARD BOXES
+   ========================================================= */
+
 .box {
     margin-top: 20px;
     padding: 20px;
     background: #ffffff;
     border-radius: 8px;
-    border: 1px solid #dddddd;
-    text-align: left;
 }
+
 .box h2 {
-    margin: 0 0 10px 0;
-    color: #333333;
+    margin-top: 0;
 }
+
+
+/* =========================================================
+   EMPTY MESSAGE
+   ========================================================= */
+
 .empty-message {
-    padding: 0;
+    padding: 15px;
     color: #777777;
-    text-align: left;
+    text-align: center;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #ffffff;
-}
-th,
-td {
-    padding: 10px;
-    border-bottom: 1px solid #dddddd;
-    text-align: left;
-}
-th {
-    font-weight: bold;
-}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+
 @media (max-width: 600px) {
+
     .header {
         padding: 15px 20px;
     }
+
     .main {
         flex-direction: column;
     }
+
     .menu {
         width: 100%;
         padding: 10px;
-        border-right: none;
-        border-bottom: 1px solid #dddddd;
     }
+
+    .menu a {
+        margin-bottom: 5px;
+    }
+
     .content {
         padding: 20px;
     }
+
     .cards {
         flex-direction: column;
     }
+
     .cards .card {
         width: 100%;
     }
