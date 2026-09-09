@@ -28,6 +28,14 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+.profile-image {
+    width: 200px;
+    height: 150px;
+    margin: 0 auto 18px;
+    object-fit: cover;
+    display: block;
+}
+
 .card h2 {
     margin-bottom: 25px;
     text-align: center;
@@ -66,8 +74,8 @@ body {
     padding: 12px;
     border: none;
     border-radius: 6px;
-    background: #1e3a8a;
-    color: #ffffff;
+    background: #1730eb;
+    color: #f7fafa;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -75,7 +83,7 @@ body {
 }
 
 .card button:hover {
-    background: #172554;
+    background: #07c8ea;
 }
 
 @media (max-width: 600px) {
