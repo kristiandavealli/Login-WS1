@@ -1,7 +1,3 @@
-/* ========================================
-   MARKETLY - ADMIN LOGIN
-   ======================================== */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -18,14 +14,12 @@ body {
     color: #333333;
 }
 
-/* Main container */
 .container {
     width: 100%;
     max-width: 420px;
     padding: 20px;
 }
 
-/* Login card */
 .card {
     width: 100%;
     padding: 35px;
@@ -34,7 +28,6 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Title */
 .card h2 {
     margin-bottom: 25px;
     text-align: center;
@@ -42,20 +35,17 @@ body {
     font-size: 28px;
 }
 
-/* Form */
 .card form {
     display: flex;
     flex-direction: column;
 }
 
-/* Labels */
 .card label {
     margin-bottom: 7px;
     font-weight: bold;
     color: #333333;
 }
 
-/* Input fields */
 .card input {
     width: 100%;
     padding: 12px;
@@ -66,13 +56,11 @@ body {
     outline: none;
 }
 
-/* Input focus */
 .card input:focus {
     border-color: #1e3a8a;
     box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.1);
 }
 
-/* Login button */
 .card button {
     width: 100%;
     padding: 12px;
@@ -86,12 +74,10 @@ body {
     transition: background 0.2s ease;
 }
 
-/* Button hover */
 .card button:hover {
     background: #172554;
 }
 
-/* Mobile */
 @media (max-width: 600px) {
     .container {
         padding: 15px;
