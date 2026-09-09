@@ -28,19 +28,18 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.profile-circle {
-    width: 82px;
-    height: 82px;
+.profile-image {
+    width: 200px;
+    height: 150px;
     margin: 0 auto 18px;
-    border-radius: 50%;
-    border: 2px solid #1e3a8a;
-    background: #ffffff;
+    object-fit: cover;
+    display: block;
 }
 
 .card h2 {
     margin-bottom: 25px;
     text-align: center;
-    color: #1e3a8a;
+    color: #000000;
     font-size: 28px;
 }
 
@@ -75,15 +74,15 @@ body {
     padding: 12px;
     border: none;
     border-radius: 6px;
-    background: #1e3a8a;
-    color: #ffffff;
+    background: #1730eb;
+    color: #f7fafa;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
 .card button:hover {
-    background: #172554;
+    background: #0ad8eb;
 }
 
 .links {
@@ -92,7 +91,7 @@ body {
 }
 
 .links a {
-    color: #1e3a8a;
+    color: #000000;
     text-decoration: none;
 }
 
