@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="LoginForm.css">
+    <title>User Login</title>
+    <link rel="stylesheet" href="loginForm.css">
 </head>
 <body>
     <main class="container">
         <section class="card">
-            <h2>Admin Login</h2>
-            <form action="admin_login.php" method="post">
+            <div class="profile-circle"></div>
+            <h2>User Login</h2>
+            <form action="user_login.php" method="post">
                 <label for="username">Username</label>
-                <input id="username"name="username"type="text"required>
+                <input id="username" name="username" type="text" required>
                 <label for="password">Password</label>
-                <input id="password"name="password"type="password"required>
-                <button type="submit">Login to Admin Dashboard</button>
+                <input id="password" name="password" type="password" required>
+                <button type="submit">User Login</button>
             </form>
+            <nav class="links">
+                <a href="register.html">Create an account</a>
+            </nav>
         </section>
     </main>
 </body>
