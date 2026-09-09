@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard | Marketly</title>
+    <link rel="stylesheet" href="staff-dashboard.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            Market<span>ly</span>
+        </div>
+        <nav class="menu">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Inventory</a>
+            <a href="#">Orders</a>
+            <a href="#">Delivery</a>
+            <a href="#">Daily Sales</a>
+            <a href="#">Customers</a>
+            <a href="#">Notifications</a>
+            <a href="#">Logout</a>
+        </nav>
+    </aside>
+    <main class="main">
+        <header class="header">
+            <div>
+                <h1>Staff Dashboard</h1>
+                <p>Manage store operations.</p>
+            </div>
+            <div class="staff-profile">
+                <div class="profile-image">
+                    <img src="Shopping1.jpg" alt="Staff Profile">
+                </div>
+                <div>
+                    <strong>Staff Member</strong>
+                    <small>Store Staff</small>
+                </div>
+            </div>
+        </header>
+        <section class="cards">
+            <div class="card">
+                <h3>Pending Orders</h3>
+                <p>0</p>
+            </div>
+            <div class="card">
+                <h3>Orders Ready</h3>
+                <p>0</p>
+            </div>
+            <div class="card">
+                <h3>Low Stock</h3>
+                <p>0</p>
+            </div>
+            <div class="card">
+                <h3>Today's Sales</h3>
+                <p>₱0</p>
+            </div>
+        </section>
+        <section class="orders">
+            <div class="section-header">
+                <div>
+                    <h2>Orders</h2>
+                    <p>No orders yet.</p>
+                </div>
+                <button class="view-btn">View All</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">No items available.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="bottom-grid">
+            <div class="panel">
+                <h2>Inventory</h2>
+                <p>No items in inventory yet.</p>
+            </div>
+            <div class="panel">
+                <h2>Today's Activity</h2>
+                <p>No activity yet.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
