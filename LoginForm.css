@@ -7,118 +7,206 @@
 
 body {
     min-height: 100vh;
+    background: #f4f6f8;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f4f6f8;
-    color: #333333;
-}
-
-.container {
-    width: 100%;
-    max-width: 420px;
     padding: 20px;
+    color: #303444;
 }
 
-.card {
+.login-container {
     width: 100%;
-    padding: 35px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    background: white;
+    border: 1px solid #cccccc;
 }
 
-.profile-image {
-    width: 200px;
-    height: 150px;
-    margin: 0 auto 18px;
-    object-fit: cover;
+.login-panel {
+    width: 100%;
+    padding: 30px;
+}
+
+.logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.marketly-logo {
+    width: 220px;
+    height: 130px;
+    object-fit: contain;
     display: block;
 }
 
-.card h2 {
-    margin-bottom: 25px;
-    text-align: center;
-    color: #000000;
-    font-size: 28px;
+.login-panel input[type="radio"] {
+    display: none;
 }
 
-.card form {
+.login-choice {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid #cccccc;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.user-choice {
+    background: white;
+    color: black;
+}
+
+.user-choice:hover {
+    background: #f5f5f5;
+}
+
+.admin-choice {
+    background: white;
+    color: black;
+}
+
+.admin-choice:hover {
+    background: #f5f5f5;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 18px 0;
+    color: #777777;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #dddddd;
+}
+
+.login-form {
+    display: none;
+    margin-top: 20px;
+    border: 1px solid #cccccc;
+    padding: 20px;
+}
+
+.login-form h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+}
+
+.login-form p {
+    color: #777777;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.login-form form {
     display: flex;
     flex-direction: column;
 }
 
-.card label {
-    margin-bottom: 7px;
-    font-weight: bold;
+.login-form label {
     color: #333333;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px;
 }
 
-.card input {
+.login-form input {
     width: 100%;
     padding: 12px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     border: 1px solid #cccccc;
-    border-radius: 6px;
-    font-size: 15px;
     outline: none;
+    font-size: 14px;
 }
 
-.card input:focus {
-    border-color: #000000;
-    box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.1);
+.login-form input:focus {
+    border-color: #999999;
 }
 
-.card button {
+.login-form button {
     width: 100%;
     padding: 12px;
-    border: none;
-    border-radius: 6px;
-    background: #1730eb;
-    color: #f7fafa;
-    font-size: 16px;
+    border: 1px solid #cccccc;
+    background: #303444;
+    color: white;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.card button:hover {
-    background: #07c8ea;
+.login-form button:hover {
+    background: #222222;
 }
 
-.links {
-    margin-top: 20px;
+#user-choice:checked ~ .user-form {
+    display: block;
+}
+
+#user-choice:checked ~ .divider {
+    display: none;
+}
+
+#user-choice:checked ~ .admin-choice {
+    display: none;
+}
+
+#admin-choice:checked ~ .admin-form {
+    display: block;
+}
+
+#admin-choice:checked ~ .user-choice {
+    display: none;
+}
+
+#admin-choice:checked ~ .divider {
+    display: none;
+}
+
+.footer-links {
+    border-top: 1px solid #dddddd;
+    margin-top: 25px;
+    padding-top: 18px;
     text-align: center;
+    color: #73798b;
+    font-size: 13px;
 }
 
-.links a {
-    color: #000000;
+.footer-links a {
+    color: #73798b;
     text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
 }
 
-.links a:hover {
-    text-decoration: underline;
-}
-
-.error {
-    margin-bottom: 15px;
-    padding: 10px;
-    border-radius: 6px;
-    background: #fee2e2;
-    color: #b91c1c;
-    text-align: center;
-    font-size: 14px;
+.footer-links a:hover {
+    color: #333333;
 }
 
 @media (max-width: 600px) {
-    .container {
+
+    body {
         padding: 15px;
     }
 
-    .card {
+    .login-panel {
         padding: 25px;
     }
 
-    .card h2 {
-        font-size: 24px;
+    .marketly-logo {
+        width: 180px;
+        height: 110px;
     }
 }
