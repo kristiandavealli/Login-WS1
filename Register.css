@@ -16,22 +16,21 @@ body {
 
 .container {
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     padding: 20px;
 }
 
 .card {
     width: 100%;
-    padding: 35px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    background: white;
+    border: 1px solid #cccccc;
 }
 
 .profile-image {
-    width: 200px;
-    height: 150px;
-    margin: 0 auto 18px;
+    width: 180px;
+    height: 130px;
+    margin: 0 auto 20px;
     object-fit: cover;
     display: block;
 }
@@ -59,30 +58,27 @@ body {
     padding: 12px;
     margin-bottom: 18px;
     border: 1px solid #cccccc;
-    border-radius: 6px;
     font-size: 15px;
     outline: none;
 }
 
 .card input:focus {
     border-color: #1e3a8a;
-    box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.1);
 }
 
 .card button {
     width: 100%;
     padding: 12px;
     border: none;
-    border-radius: 6px;
-    background: #1730eb;
-    color: #f7fafa;
+    background: #c4c7c7;
+    color: rgb(1, 1, 1);
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
 .card button:hover {
-    background: #0ad8eb;
+    background: #e1e3e3;
 }
 
 .links {
@@ -102,7 +98,6 @@ body {
 .error {
     margin-bottom: 15px;
     padding: 10px;
-    border-radius: 6px;
     background: #fee2e2;
     color: #b91c1c;
     text-align: center;
@@ -110,6 +105,7 @@ body {
 }
 
 @media (max-width: 600px) {
+
     .container {
         padding: 15px;
     }
@@ -121,4 +117,5 @@ body {
     .card h2 {
         font-size: 24px;
     }
+
 }
