@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard | Marketly</title>
     <link rel="stylesheet" href="AdminDashboard.css">
 </head>
 <body class="admin-page">
@@ -11,39 +11,40 @@
         <h2>Marketly Admin</h2>
         <a href="logout.php">Logout</a>
     </header>
-    <main class="main admin-main">
+    <main class="main">
         <nav class="menu">
             <a class="active" href="#summary">Dashboard</a>
             <a href="#orders">Orders</a>
             <a href="#products">Products</a>
             <a href="#users">Users</a>
-            <a href="logout.php">Logout</a>
         </nav>
         <section class="content" id="summary">
             <h1>Admin Dashboard</h1>
-            <p class="subtitle">Welcome back! Here is your shop summary.</p>
             <div class="cards">
                 <div class="card">
-                    <p>Total Sales</p>
-                    <h2>$0.00</h2>
-                </div>
-                <div class="card">
-                    <p>Orders</p>
+                    <p>Total Sale</p>
                     <h2>0</h2>
                 </div>
                 <div class="card">
-                    <p>Products</p>
+                    <p>Order</p>
+                    <h2>0</h2>
+                </div>
+                <div class="card">
+                    <p>Product</p>
                     <h2>0</h2>
                 </div>
             </div>
-            <section class="box" id="orders"><h2>Orders</h2>
-                <p class="empty-message">No orders yet.</p>
+            <section class="box" id="orders">
+                <h2>Order</h2>
+                <p class="empty-message">No order.</p>
             </section>
-            <section class="box" id="products"><h2>Products</h2>
-                <p class="empty-message">No products available yet.</p>
+            <section class="box" id="products">
+                <h2>Product</h2>
+                <p class="empty-message">No products available.</p>
             </section>
-            <section class="box" id="users"><h2>Users</h2>
-                <p class="empty-message"> No user accounts available yet.</p>
+            <section class="box" id="users">
+                <h2>User</h2>
+                <p class="empty-message">No user accounts available.</p>
             </section>
         </section>
     </main>
