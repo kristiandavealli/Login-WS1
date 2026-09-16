@@ -20,26 +20,28 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 18px 8%;
-    background: #1e3a8a;
-    color: #ffffff;
+    background: #c4c7c7;
+    color: rgb(1, 1, 1);
+    border-bottom: 1px solid #cccccc;
 }
 
 .user-header h2 {
-    margin: 0;
+    font-size: 22px;
 }
 
 .user-header nav {
     display: flex;
-    gap: 20px;
+    gap: 18px;
 }
 
 .user-header nav a {
-    color: #ffffff;
+    color: rgb(0, 0, 0);
     text-decoration: none;
+    padding: 6px;
 }
 
 .user-header nav a:hover {
-    text-decoration: underline;
+    background: #9d9e9f;
 }
 
 .user-main {
@@ -50,61 +52,68 @@ body {
 }
 
 .welcome-banner {
-    margin-bottom: 30px;
-    padding: 40px;
-    border-radius: 10px;
-    background: #dbeafe;
+    margin-bottom: 25px;
+    padding: 30px;
+    background: white;
+    border: 1px solid #cccccc;
 }
 
 .welcome-banner p {
     margin-bottom: 10px;
-    color: #1e3a8a;
-    font-size: 14px;
+    color: #000000;
+    font-size: 13px;
     font-weight: bold;
 }
 
 .welcome-banner h1 {
     margin-bottom: 10px;
-    color: #1e3a8a;
+    color: #000000;
+    font-size: 27px;
 }
 
 .welcome-banner span {
     color: #555555;
+    font-size: 14px;
 }
 
 .user-main section h2 {
     margin-bottom: 15px;
+    color: #333333;
 }
 
 .shop-card {
-    padding: 25px;
-    margin-bottom: 25px;
-    background: #ffffff;
-    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: white;
+    border: 1px solid #cccccc;
 }
 
 .empty-message {
-    padding: 15px;
+    padding: 20px;
     color: #777777;
     text-align: center;
+    border: 1px solid #dddddd;
+    background: #fafafa;
 }
 
 .cart-box {
     margin-top: 20px;
-    padding: 25px;
-    background: #ffffff;
-    border-radius: 8px;
+    padding: 20px;
+    background: white;
+    border: 1px solid #cccccc;
 }
 
 .cart-box h2 {
-    color: #1e3a8a;
+    color: #000000;
+    margin-bottom: 10px;
 }
 
 .cart-box p {
     color: #666666;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+
     .user-header {
         flex-direction: column;
         gap: 15px;
@@ -114,7 +123,7 @@ body {
     .user-header nav {
         flex-wrap: wrap;
         justify-content: center;
-        gap: 10px;
+        gap: 8px;
     }
 
     .user-main {
@@ -124,4 +133,5 @@ body {
     .welcome-banner {
         padding: 25px;
     }
+
 }
