@@ -6,29 +6,31 @@
 }
 
 body {
-    color: #333333;
     background: #f4f6f8;
+    color: #333333;
 }
 
 .admin-page {
-    background: #f4f6f8;
+    min-height: 100vh;
 }
 
 .header {
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 8%;
-    background: #1e3a8a;
-    color: #ffffff;
+    padding: 0 30px;
+    background: #999999;
+    color: rgb(0, 0, 0);
+    border-bottom: 1px solid #cccccc;
 }
 
 .header h2 {
-    margin: 0;
+    font-size: 20px;
 }
 
 .header a {
-    color: #ffffff;
+    color: white;
     text-decoration: none;
 }
 
@@ -42,39 +44,44 @@ body {
 }
 
 .menu {
-    width: 180px;
-    padding: 20px;
-    background: #ffffff;
+    width: 190px;
+    padding: 20px 15px;
+    background: white;
+    border-right: 1px solid #cccccc;
 }
 
 .menu a {
     display: block;
-    margin-bottom: 8px;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 11px;
+    margin-bottom: 7px;
     color: #333333;
     text-decoration: none;
+    border: 1px solid #dddddd;
 }
 
-.menu a:hover,
-.menu .active {
-    background: #dbeafe;
-    color: #1e3a8a;
+.menu a:hover {
+    background: #eeeeee;
+}
+
+.menu a.active {
+    background: #ffffff;
+    color: #000102;
+    font-weight: bold;
 }
 
 .content {
     width: 100%;
-    max-width: 1000px;
     padding: 30px;
 }
 
 .content h1 {
-    margin-top: 0;
+    font-size: 26px;
+    margin-bottom: 8px;
 }
 
 .subtitle {
-    margin-top: 8px;
     color: #666666;
+    font-size: 14px;
 }
 
 .cards {
@@ -83,45 +90,48 @@ body {
     margin: 25px 0;
 }
 
-.cards .card {
-    flex: 1;
+.card {
+    width: 33.33%;
     padding: 20px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: none;
-    text-align: left;
+    background: white;
+    border: 1px solid #cccccc;
 }
 
-.cards p,
-.cards h2 {
-    margin: 0;
+.card p {
+    color: #666666;
+    font-size: 14px;
 }
 
-.cards h2 {
+.card h2 {
     margin-top: 10px;
-    color: #1e3a8a;
+    color: #000000;
+    font-size: 24px;
 }
 
 .box {
     margin-top: 20px;
     padding: 20px;
-    background: #ffffff;
-    border-radius: 8px;
+    background: white;
+    border: 1px solid #cccccc;
 }
 
 .box h2 {
-    margin-top: 0;
+    font-size: 19px;
+    margin-bottom: 10px;
 }
+
 .empty-message {
     padding: 15px;
     color: #777777;
     text-align: center;
+    border: 1px solid #dddddd;
+    background: #fafafa;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
     .header {
-        padding: 15px 20px;
+        padding: 0 20px;
     }
 
     .main {
@@ -131,6 +141,8 @@ body {
     .menu {
         width: 100%;
         padding: 10px;
+        border-right: none;
+        border-bottom: 1px solid #cccccc;
     }
 
     .menu a {
@@ -145,7 +157,8 @@ body {
         flex-direction: column;
     }
 
-    .cards .card {
+    .card {
         width: 100%;
     }
+
 }
