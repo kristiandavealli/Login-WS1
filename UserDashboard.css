@@ -6,13 +6,20 @@
 }
 
 body {
-    color: #333333;
-    background: #f4f6f8;
+    color: #000000;
+    position: relative;
+    isolation: isolate;
 }
 
 .user-page {
     min-height: 100vh;
-    background: #f4f6f8;
+}
+
+.background-image {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url("haa.avif")
 }
 
 .user-header {
@@ -20,96 +27,163 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 18px 8%;
-    background: #c4c7c7;
-    color: rgb(1, 1, 1);
-    border-bottom: 1px solid #cccccc;
+    background: #865df6;
+    color: #000000;
+    box-shadow: 0 2px 12px rgba(67, 44, 131, 0.22);
 }
 
-.user-header h2 {
+.brand {
+    color: #000000;
     font-size: 22px;
+    font-weight: 700;
+    text-decoration: none;
 }
 
-.user-header nav {
+.landing-nav {
     display: flex;
     gap: 18px;
+    align-items: center;
 }
 
-.user-header nav a {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    padding: 6px;
-}
-
-.user-header nav a:hover {
-    background: #9d9e9f;
-}
-
-.user-main {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 30px;
-}
-
-.welcome-banner {
-    margin-bottom: 25px;
-    padding: 30px;
-    background: white;
-    border: 1px solid #cccccc;
-}
-
-.welcome-banner p {
-    margin-bottom: 10px;
+.landing-nav a {
     color: #000000;
-    font-size: 13px;
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+
+.landing-nav a:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.landing-nav .nav-login {
+    border: 1px solid #ffffff;
+    color: #000000;
+}
+
+.landing-nav .nav-signup {
+    background: #5636a8;
+    color: #000000;
+}
+
+.landing-nav .nav-signup:hover {
+    background: #5636a8;
+}
+
+.user-header nav a:focus-visible,
+.menu a:focus-visible,
+.view-btn:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 2px;
+}
+
+body:has(#shop:target) .user-header nav a[href="#shop"],
+body:has(#products:target) .user-header nav a[href="#products"],
+body:has(#cart:target) .user-header nav a[href="#cart"],
+body:has(#orders:target) .user-header nav a[href="#orders"],
+body:has(#profile:target) .user-header nav a[href="#profile"] {
+    background: #9d9e9f;
     font-weight: bold;
 }
 
-.welcome-banner h1 {
-    margin-bottom: 10px;
-    color: #000000;
-    font-size: 27px;
+body:has(#products:target) .user-header nav a.active,
+body:has(#cart:target) .user-header nav a.active,
+body:has(#orders:target) .user-header nav a.active,
+body:has(#profile:target) .user-header nav a.active {
+    background: transparent;
+    font-weight: normal;
 }
 
-.welcome-banner span {
-    color: #555555;
+.landing-main {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    padding: 72px 30px 36px;
+}
+
+.hero {
+    max-width: 650px;
+    padding: 48px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(23, 58, 77, 0.18);
+}
+
+.eyebrow {
+    margin-bottom: 12px;
+    color: #000000;
     font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
-.user-main section h2 {
-    margin-bottom: 15px;
-    color: #333333;
-}
-
-.shop-card {
-    padding: 20px;
-    margin-bottom: 20px;
-    background: white;
-    border: 1px solid #cccccc;
-}
-
-.empty-message {
-    padding: 20px;
-    color: #777777;
-    text-align: center;
-    border: 1px solid #dddddd;
-    background: #fafafa;
-}
-
-.cart-box {
-    margin-top: 20px;
-    padding: 20px;
-    background: white;
-    border: 1px solid #cccccc;
-}
-
-.cart-box h2 {
+.hero h1 {
+    margin-bottom: 16px;
     color: #000000;
-    margin-bottom: 10px;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.1;
 }
 
-.cart-box p {
-    color: #666666;
+.hero > p:not(.eyebrow) {
+    max-width: 510px;
+    color: #000000;
+    font-size: 17px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 12px 18px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.primary-button {
+    background: #6d4cc7;
+    color: #000000;
+}
+
+.secondary-button {
+    border: 1px solid #6d4cc7;
+    color: #000000;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.features article {
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 12px;
+    box-shadow: 0 5px 18px rgba(23, 58, 77, 0.12);
+}
+
+.features h2 {
+    margin-bottom: 10px;
+    color: #000000;
+    font-size: 19px;
+}
+
+.features p,
+.landing-footer {
+    color: #000000;
+}
+
+.landing-footer {
+    padding: 20px;
+    text-align: center;
+    font-size: 13px;
 }
 
 @media (max-width: 700px) {
@@ -120,18 +194,22 @@ body {
         padding: 15px 20px;
     }
 
-    .user-header nav {
+    .landing-nav {
         flex-wrap: wrap;
         justify-content: center;
         gap: 8px;
     }
 
-    .user-main {
+    .landing-main {
         padding: 20px;
     }
 
-    .welcome-banner {
-        padding: 25px;
+    .hero {
+        padding: 30px;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
     }
 
 }
