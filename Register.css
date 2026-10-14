@@ -10,8 +10,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f4f6f8;
+    background: #e0f3fb;
     color: #333333;
+    position: relative;
+    isolation: isolate;
+}
+
+.background-image {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url("haa.avif")
 }
 
 .container {
@@ -23,8 +32,9 @@ body {
 .card {
     width: 100%;
     padding: 30px;
-    background: white;
-    border: 1px solid #cccccc;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(74, 48, 145, 0.2);
 }
 
 .profile-image {
@@ -63,22 +73,23 @@ body {
 }
 
 .card input:focus {
-    border-color: #1e3a8a;
+    border-color: #6d4cc7;
 }
 
 .card button {
     width: 100%;
     padding: 12px;
     border: none;
-    background: #c4c7c7;
-    color: rgb(1, 1, 1);
+    background: #6d4cc7;
+    color: #ffffff;
+    border-radius: 6px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
 .card button:hover {
-    background: #e1e3e3;
+    background: #5636a8;
 }
 
 .links {
@@ -87,7 +98,7 @@ body {
 }
 
 .links a {
-    color: #000000;
+    color: #5636a8;
     text-decoration: none;
 }
 
