@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketly Login</title>
-    <link rel="stylesheet" href="loginForm.css">
+    <title>Staff &amp; Admin Login | Marketly</title>
+    <link rel="stylesheet" href="LoginForm.css">
 </head>
 <body>
     <main class="login-container">
@@ -12,16 +12,16 @@
             <div class="logo-container">
                 <img src="Shopping1.jpg" alt="Marketly Logo" class="marketly-logo">
             </div>
-            <input type="radio" name="login-type" id="user-choice">
-            <label for="user-choice" class="login-choice user-choice">User Login</label>
+            <input type="radio" name="login-type" id="staff-choice">
+            <label for="staff-choice" class="login-choice staff-choice">Staff Login</label>
             <div class="divider">
                 <span>Or</span>
             </div>
             <input type="radio" name="login-type" id="admin-choice">
             <label for="admin-choice" class="login-choice admin-choice">Admin Login</label>
-            <div class="login-form user-form">
-                <h2>User Login</h2>
-                <form action="user_login.php" method="post">
+            <div class="login-form staff-form">
+                <h2>Staff Login</h2>
+                <form action="staff_login.php" method="post">
                     <label for="username">Username</label>
                     <input type="text"id="username"name="username"required>
                     <label for="password">Password</label>
@@ -37,10 +37,10 @@
                     <label for="admin-password">Password</label>
                     <input type="password"id="admin-password"name="password"required>
                     <button type="submit">Login</button>
-                </formrm>
+                </form>
             </div>
-            <div class="footer-links">Don't have an account?
-                <a href="register.html">Create an Account</a>
+            <div class="footer-links">
+                <a href="index.php">Back to Marketly</a>
             </div>
         </section>
     </main>
