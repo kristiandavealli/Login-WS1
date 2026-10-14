@@ -6,23 +6,31 @@
 }
 
 body {
-    background: #f4f6f8;
     color: #333333;
+    position: relative;
+    isolation: isolate;
+}
+
+.background-image {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url("haa.avif")
 }
 
 .admin-page {
     min-height: 100vh;
 }
-
+ 
 .header {
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 30px;
-    background: #999999;
-    color: rgb(0, 0, 0);
-    border-bottom: 1px solid #cccccc;
+    background: #6d4cc7;
+    color: #ffffff;
+    border-bottom: none;
 }
 
 .header h2 {
@@ -46,26 +54,42 @@ body {
 .menu {
     width: 190px;
     padding: 20px 15px;
-    background: white;
-    border-right: 1px solid #cccccc;
+    background: #6d4cc7;
+    border-right: none;
 }
 
 .menu a {
     display: block;
     padding: 11px;
     margin-bottom: 7px;
-    color: #333333;
+    color: #ffffff;
     text-decoration: none;
-    border: 1px solid #dddddd;
+    border: none;
 }
 
 .menu a:hover {
-    background: #eeeeee;
+    background: rgba(255, 255, 255, 0.16);
 }
 
 .menu a.active {
     background: #ffffff;
-    color: #000102;
+    color: #5636a8;
+    font-weight: bold;
+}
+
+body:has(#orders:target) .menu a.active,
+body:has(#products:target) .menu a.active,
+body:has(#users:target) .menu a.active {
+    background: transparent;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+body:has(#orders:target) .menu a[href="#orders"],
+body:has(#products:target) .menu a[href="#products"],
+body:has(#users:target) .menu a[href="#users"] {
+    background: #ffffff;
+    color: #5636a8;
     font-weight: bold;
 }
 
@@ -94,7 +118,7 @@ body {
     width: 33.33%;
     padding: 20px;
     background: white;
-    border: 1px solid #cccccc;
+    border: none;
 }
 
 .card p {
@@ -112,7 +136,12 @@ body {
     margin-top: 20px;
     padding: 20px;
     background: white;
-    border: 1px solid #cccccc;
+    border: none;
+}
+
+#summary,
+.box {
+    scroll-margin-top: 20px;
 }
 
 .box h2 {
@@ -124,7 +153,7 @@ body {
     padding: 15px;
     color: #777777;
     text-align: center;
-    border: 1px solid #dddddd;
+    border: none;
     background: #fafafa;
 }
 
@@ -141,8 +170,7 @@ body {
     .menu {
         width: 100%;
         padding: 10px;
-        border-right: none;
-        border-bottom: 1px solid #cccccc;
+        border: none;
     }
 
     .menu a {
