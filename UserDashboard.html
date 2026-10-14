@@ -4,44 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketly Shop</title>
-    <link rel="stylesheet" href="userDashboard.css">
+    <link rel="stylesheet" href="UserDashboard.css">
 </head>
 <body class="user-page">
     <header class="user-header">
-        <h2>Marketly</h2>
-        <nav>
-            <a href="#shop">Shop</a>
-            <a href="#products">Products</a>
-            <a href="#cart">Cart</a>
-            <a href="#orders">My Orders</a>
-            <a href="#profile">Profile</a>
-            <a href="logout.php">Logout</a>
+        <a class="brand" href="#home">Marketly</a>
+        <nav class="landing-nav" aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a class="nav-login" href="UserLogin.php">Log in</a>
+            <a class="nav-signup" href="Register.php">Sign up</a>
         </nav>
     </header>
-    <main class="user-main">
-        <section class="welcome-banner" id="shop">
-            <h1>WELCOME TO HAPPYSHOP.</h1>
-        </section>
-        <section id="products">
-            <h2>Products</h2>
-            <div class="shop-card">
-                <p class="empty-message">
-                    No products available.
-                </p>
+    <main class="landing-main" id="home">
+        <section class="hero">
+            <p class="eyebrow">Welcome to Marketly</p>
+            <h1>Shop simple. Find what youre needs.</h1>
+            <p>Discover products and manage your shopping in one convenient place.</p>
+            <div class="hero-actions">
+                <a class="primary-button" href="Register.php">Create an account</a>
+                <a class="secondary-button" href="UserLogin.php">Log in</a>
             </div>
         </section>
-        <section class="cart-box" id="cart">
-            <h2>Cart / Checkout</h2>
-            <p>Your cart is empty.</p>
-        </section>
-        <section class="cart-box" id="orders">
-            <h2>My Orders</h2>
-            <p>No orders yet.</p>
-        </section>
-        <section class="cart-box" id="profile">
-            <h2>Profile</h2>
-            <p>Profile information will appear here.</p>
+        <section class="features" id="features">
+            <article>
+                <h2>Easy shopping</h2>
+                <p>Browse products and place orders with easy shopping.</p>
+            </article>
+            <article>
+                <h2>Order updates</h2>
+                <p>Stay informed that your order is prepared to delivered.</p>
+            </article>
+            <article>
+                <h2>One account</h2>
+                <p>Create an account that you can to shopping.</p>
+            </article>
         </section>
     </main>
+    <footer class="landing-footer">
+        <p>&copy; 2026 Marketly</p>
+    </footer>
 </body>
 </html>
