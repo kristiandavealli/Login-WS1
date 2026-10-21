@@ -6,9 +6,9 @@
 }
 
 body {
-    color: #333333;
-    position: relative;
-    isolation: isolate;
+    background: linear-gradient(135deg, #667eea, #6d03d6);
+    color: #000000;
+    line-height: 1.45;
 }
 
 .background-image {
