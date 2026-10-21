@@ -6,20 +6,12 @@
 }
 
 body {
-    background: linear-gradient(135deg, #667eea, #6d03d6);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    isolation: isolate;
-}
-
-.background-image {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: url("haa.avif")
+    background: linear-gradient(rgba(38, 25, 77, 0.42), rgba(38, 25, 77, 0.42)), url("lala.png") center / cover fixed;
+    color: #333333;
 }
 
 .container {
