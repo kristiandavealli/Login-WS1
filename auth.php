@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+$sessionDirectory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'marketly_sessions';
+if (!is_dir($sessionDirectory)) {
+    mkdir($sessionDirectory, 0775, true);
+}
+
+session_save_path($sessionDirectory);
 session_start();
 
 function db(): PDO
@@ -11,58 +17,112 @@ function db(): PDO
         return $pdo;
     }
 
-    $directory = __DIR__ . '/data';
-    if (!is_dir($directory)) {
-        mkdir($directory, 0775, true);
-    }
+    $host = getenv('DB_HOST') ?: '127.0.0.1';
+    $database = getenv('DB_NAME') ?: 'marketly';
+    $username = getenv('DB_USER') ?: 'root';
+    $password = getenv('DB_PASS') ?: '';
 
-    $pdo = new PDO('sqlite:' . $directory . '/marketly.sqlite');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $pdo->exec('PRAGMA foreign_keys = ON');
+    $pdo = new PDO(
+        "mysql:host={$host};dbname={$database};charset=utf8mb4",
+        $username,
+        $password,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]
+    );
 
-    $pdo->exec("CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL,
-        role TEXT NOT NULL CHECK(role IN ('admin', 'staff', 'user')),
-        address TEXT DEFAULT '',
-        contact_number TEXT DEFAULT '',
-        is_active INTEGER NOT NULL DEFAULT 1,
-        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-    )");
-    $pdo->exec("CREATE TABLE IF NOT EXISTS products (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        description TEXT DEFAULT '',
-        image TEXT DEFAULT '',
-        price REAL NOT NULL CHECK(price >= 0),
-        stock INTEGER NOT NULL DEFAULT 0 CHECK(stock >= 0),
-        is_active INTEGER NOT NULL DEFAULT 1,
-        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-    )");
+    $pdo->exec(
+        "CREATE TABLE IF NOT EXISTS users (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(100) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL,
+            role ENUM('admin', 'staff', 'user') NOT NULL,
+            address VARCHAR(255) NOT NULL DEFAULT '',
+            contact_number VARCHAR(50) NOT NULL DEFAULT '',
+            is_active TINYINT(1) NOT NULL DEFAULT 1,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    );
+    $pdo->exec(
+        "CREATE TABLE IF NOT EXISTS products (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            description TEXT NOT NULL,
+            image VARCHAR(255) NOT NULL DEFAULT '',
+            price DECIMAL(10, 2) NOT NULL,
+            stock INT UNSIGNED NOT NULL DEFAULT 0,
+            is_active TINYINT(1) NOT NULL DEFAULT 1,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    );
+    $pdo->exec(
+        "CREATE TABLE IF NOT EXISTS carts (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id INT UNSIGNED NOT NULL UNIQUE,
+            CONSTRAINT fk_carts_user
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    );
+    $pdo->exec(
+        "CREATE TABLE IF NOT EXISTS cart_items (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            cart_id INT UNSIGNED NOT NULL,
+            product_id INT UNSIGNED NOT NULL,
+            quantity INT UNSIGNED NOT NULL,
+            UNIQUE KEY uq_cart_product (cart_id, product_id),
+            CONSTRAINT fk_cart_items_cart
+                FOREIGN KEY (cart_id) REFERENCES carts(id) ON DELETE CASCADE,
+            CONSTRAINT fk_cart_items_product
+                FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    );
+    $pdo->exec(
+        "CREATE TABLE IF NOT EXISTS orders (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id INT UNSIGNED NOT NULL,
+            total DECIMAL(10, 2) NOT NULL,
+            payment_status VARCHAR(30) NOT NULL DEFAULT 'paid',
+            status VARCHAR(30) NOT NULL DEFAULT 'pending',
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            CONSTRAINT fk_orders_user
+                FOREIGN KEY (user_id) REFERENCES users(id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    );
+    $pdo->exec(
+        "CREATE TABLE IF NOT EXISTS order_items (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            order_id INT UNSIGNED NOT NULL,
+            product_id INT UNSIGNED NOT NULL,
+            product_name VARCHAR(255) NOT NULL,
+            price DECIMAL(10, 2) NOT NULL,
+            quantity INT UNSIGNED NOT NULL,
+            CONSTRAINT fk_order_items_order
+                FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+            CONSTRAINT fk_order_items_product
+                FOREIGN KEY (product_id) REFERENCES products(id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    );
 
-    $productColumns = $pdo->query('PRAGMA table_info(products)')->fetchAll();
-    $hasImageColumn = in_array('image', array_column($productColumns, 'name'), true);
-    if (!$hasImageColumn) {
-        $pdo->exec("ALTER TABLE products ADD COLUMN image TEXT DEFAULT ''");
-    }
-    $pdo->exec('CREATE TABLE IF NOT EXISTS carts (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL UNIQUE, FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE)');
-    $pdo->exec('CREATE TABLE IF NOT EXISTS cart_items (id INTEGER PRIMARY KEY AUTOINCREMENT, cart_id INTEGER NOT NULL, product_id INTEGER NOT NULL, quantity INTEGER NOT NULL CHECK(quantity > 0), UNIQUE(cart_id, product_id), FOREIGN KEY(cart_id) REFERENCES carts(id) ON DELETE CASCADE, FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE)');
-    $pdo->exec("CREATE TABLE IF NOT EXISTS orders (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL, total REAL NOT NULL, payment_status TEXT NOT NULL DEFAULT 'paid', status TEXT NOT NULL DEFAULT 'pending', created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(user_id) REFERENCES users(id))");
-    $pdo->exec('CREATE TABLE IF NOT EXISTS order_items (id INTEGER PRIMARY KEY AUTOINCREMENT, order_id INTEGER NOT NULL, product_id INTEGER NOT NULL, product_name TEXT NOT NULL, price REAL NOT NULL, quantity INTEGER NOT NULL, FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE CASCADE)');
+    $seedUser = $pdo->prepare(
+        'INSERT INTO users (username, password, role) VALUES (?, ?, ?) '
+        . 'ON DUPLICATE KEY UPDATE password = VALUES(password), role = VALUES(role), is_active = 1'
+    );
+    $seedUser->execute(['kriz', password_hash('kriz123', PASSWORD_DEFAULT), 'admin']);
+    $seedUser->execute(['jade', password_hash('jade12345', PASSWORD_DEFAULT), 'staff']);
+    $seedUser->execute(['nico', password_hash('nico1122', PASSWORD_DEFAULT), 'user']);
 
-    $seedUser = $pdo->prepare('INSERT OR IGNORE INTO users (username, password, role) VALUES (?, ?, ?)');
-    $seedUser->execute(['admin', password_hash('Admin123!', PASSWORD_DEFAULT), 'admin']);
-    $seedUser->execute(['staff', password_hash('Staff123!', PASSWORD_DEFAULT), 'staff']);
+    $pdo->exec("UPDATE users SET is_active = 0 WHERE username IN ('admin', 'staff', 'demo_user')");
 
-    $sampleProduct = $pdo->prepare('SELECT id FROM products WHERE image = ? LIMIT 1');
-    $seedProduct = $pdo->prepare('INSERT INTO products (name, description, image, price, stock) VALUES (?, ?, ?, ?, ?)');
+    $sampleProduct = $pdo->prepare('SELECT id FROM products WHERE name = ? LIMIT 1');
+    $seedProduct = $pdo->prepare(
+        'INSERT INTO products (name, description, image, price, stock) VALUES (?, ?, ?, ?, ?)'
+    );
     foreach ([
-        ['Shoes', 'Comfortable everyday shoes.', 'shoes.webp', 1299, 10],
-        ['Bag', 'Practical bag for daily essentials.', 'bag.jpeg', 899, 10],
+        ['Shoes', '', '', 1299, 10],
+        ['Bag', '', '', 899, 10],
     ] as $product) {
-        $sampleProduct->execute([$product[2]]);
+        $sampleProduct->execute([$product[0]]);
         if (!$sampleProduct->fetch()) {
             $seedProduct->execute($product);
         }
@@ -70,7 +130,6 @@ function db(): PDO
 
     return $pdo;
 }
-
 function find_user(string $username): ?array
 {
     $statement = db()->prepare('SELECT * FROM users WHERE lower(username) = lower(?) LIMIT 1');
@@ -89,15 +148,27 @@ function current_user(): ?array
     return $statement->fetch() ?: null;
 }
 
+function dashboard_for_role(string $role): string
+{
+    return match ($role) {
+        'admin' => 'AdminDashboard.php',
+        'staff' => 'Market-dashboard.php',
+        'user' => 'UserAccount.php',
+        default => 'LoginForm.php',
+    };
+}
 function require_role(string $role): void
 {
     $user = current_user();
-    if (!$user || $user['role'] !== $role) {
-        header('Location: ' . ($role === 'user' ? 'UserLogin.php' : 'LoginForm.php'));
-        exit;
+
+    if (!$user) {
+        redirect('LoginForm.php');
+    }
+
+    if ($user['role'] !== $role) {
+        redirect(dashboard_for_role($user['role']));
     }
 }
-
 function redirect(string $location): void
 {
     header('Location: ' . $location);
