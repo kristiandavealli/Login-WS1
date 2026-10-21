@@ -3,46 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff &amp; Admin Login | Marketly</title>
+    <title>Log in | Marketly</title>
     <link rel="stylesheet" href="LoginForm.css">
 </head>
 <body>
     <main class="login-container">
         <section class="login-panel">
             <div class="logo-container">
-                <img src="Shopping1.jpg" alt="Marketly Logo" class="marketly-logo">
+                <img src="Shopping1.jpg" alt="Marketly logo" class="marketly-logo">
             </div>
-            <input type="radio" name="login-type" id="staff-choice">
-            <label for="staff-choice" class="login-choice staff-choice">Staff Login</label>
-            <div class="divider">
-                <span>Or</span>
-            </div>
-            <input type="radio" name="login-type" id="admin-choice">
-            <label for="admin-choice" class="login-choice admin-choice">Admin Login</label>
-            <div class="login-form staff-form">
-                <h2>Staff Login</h2>
-                <form action="staff_login.php" method="post">
+            <div class="login-form">
+                <h1>Log in to Marketly</h1>
+
+                <?php if ($message = take_flash()): ?>
+                    <p class="form-message"><?= e($message) ?></p>
+                <?php endif; ?>
+                <form action="login.php" method="post">
                     <label for="username">Username</label>
-                    <input type="text"id="username"name="username"required>
+                    <input id="username" name="username" type="text" autocomplete="username" required>
                     <label for="password">Password</label>
-                    <input type="password"id="password"name="password"required>
-                    <button type="submit">Login</button>
+                    <input id="password" name="password" type="password" autocomplete="current-password" required>
+                    <button type="submit">Log in</button>
                 </form>
-            </div>
-            <div class="login-form admin-form">
-                <h2>Admin Login</h2>
-                <form action="admin_login.php" method="post">
-                    <label for="admin-username">Username</label>
-                    <input type="text"id="admin-username"name="username"required>
-                    <label for="admin-password">Password</label>
-                    <input type="password"id="admin-password"name="password"required>
-                    <button type="submit">Login</button>
-                </form>
+                <p class="register-link">Don't have an account? <a href="register.php">Sign up</a></p>
             </div>
             <div class="footer-links">
                 <a href="index.php">Back to Marketly</a>
             </div>
+            <section class="demo-accounts" aria-labelledby="demo-accounts-title">
+                <h2 id="demo-accounts-title">Demo accounts</h2>
+                <p><strong>Admin:</strong> kriz / kriz123</p>
+                <p><strong>Staff:</strong> jade / jade12345</p>
+                <p><strong>User:</strong> nico / nico1122</p>
+            </section>
         </section>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.flash, .form-message').forEach((notification) => {
+                window.setTimeout(() => {
+                    notification.style.transition = 'opacity 0.35s ease';
+                    notification.style.opacity = '0';
+                    window.setTimeout(() => notification.remove(), 350);
+                }, 3000);
+            });
+        });
+    </script>
 </body>
 </html>
