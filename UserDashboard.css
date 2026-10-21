@@ -6,20 +6,9 @@
 }
 
 body {
+    background: linear-gradient(135deg, #667eea, #6d03d6);
     color: #000000;
-    position: relative;
-    isolation: isolate;
-}
-
-.user-page {
-    min-height: 100vh;
-}
-
-.background-image {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: url("haa.avif")
+    line-height: 1.45;
 }
 
 .user-header {
