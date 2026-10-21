@@ -7,11 +7,19 @@
 
 body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea, #764ba2);
     display: grid;
     place-items: center;
     padding: 20px;
-    color: #000000;
+    color: #27343b;
+    position: relative;
+    isolation: isolate;
+}
+
+.background-image {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url("haa.avif")
 }
 
 .login-container {
@@ -34,14 +42,24 @@ body {
 }
 
 h1 {
-    color: #000000;
+    color: #5636a8;
     font-size: 28px;
     text-align: center;
 }
 
 .intro {
     margin: 8px 0 26px;
-    color: #000000;
+    color: #61717a;
+    text-align: center;
+}
+
+.form-message {
+    margin: 0 0 18px;
+    padding: 10px;
+    border-radius: 6px;
+    background: #eeeaff;
+    color: #5636a8;
+    font-size: 14px;
     text-align: center;
 }
 
@@ -75,7 +93,7 @@ button {
     border: 0;
     border-radius: 6px;
     background: #6d4cc7;
-    color: #000000;
+    color: #ffffff;
     cursor: pointer;
     font-size: 15px;
     font-weight: 700;
@@ -89,14 +107,14 @@ button:hover {
 .back-link {
     display: block;
     margin-top: 20px;
-    color: #000000;
+    color: #61717a;
     font-size: 14px;
     text-align: center;
 }
 
 .account-link a,
 .back-link {
-    color: #000000;
+    color: #6d4cc7;
     font-weight: 700;
     text-decoration: none;
 }
