@@ -11,6 +11,7 @@
         <section class="card">
             <img src="Shopping1.jpg" alt="Profile Picture" class="profile-image">
             <h2>Create Account</h2>
+            <?php if ($message = take_flash()): ?><p class="form-message"><?= e($message) ?></p><?php endif; ?>
             <form action="register.php" method="post">
                 <label for="username">Username</label>
                 <input id="username" name="username" type="text" required>
