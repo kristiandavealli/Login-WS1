@@ -12,6 +12,7 @@
             <img src="Shopping1.jpg" alt="Marketly logo" class="marketly-logo">
             <h1>User Login</h1>
             <p class="intro">Log in to access your Marketly account.</p>
+            <?php if ($message = take_flash()): ?><p class="form-message"><?= e($message) ?></p><?php endif; ?>
             <form action="user_login.php" method="post">
                 <label for="username">Username</label>
                 <input id="username" name="username" type="text" required>
@@ -19,7 +20,7 @@
                 <input id="password" name="password" type="password" required>
                 <button type="submit">Log in</button>
             </form>
-            <p class="account-link">Don't have an account? <a href="Register.php">Sign up</a></p>
+            <p class="account-link">Don't have an account? <a href="register.php">Sign up</a></p>
             <a class="back-link" href="index.php">Back to Marketly</a>
         </section>
     </main>
