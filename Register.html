@@ -26,9 +26,20 @@
                 <button type="submit">Register</button>
             </form>
             <nav class="links">
-                <a href="UserLogin.php">Already have an account? Login</a>
+                <a href="LoginForm.php">Already have an account? Login</a>
             </nav>
         </section>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.flash, .form-message').forEach((notification) => {
+                window.setTimeout(() => {
+                    notification.style.transition = 'opacity 0.35s ease';
+                    notification.style.opacity = '0';
+                    window.setTimeout(() => notification.remove(), 350);
+                }, 3000);
+            });
+        });
+    </script>
 </body>
 </html>
