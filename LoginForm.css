@@ -1,4 +1,4 @@
-* {
+]* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -98,12 +98,13 @@ body {
 }
 
 .login-form {
-    display: none;
+    display: block;
     margin-top: 16px;
     border: none;
     padding: 0;
 }
 
+.login-form h1,
 .login-form h2 {
     font-size: 22px;
     margin-bottom: 6px;
@@ -204,4 +205,37 @@ body {
         width: 130px;
         height: 80px;
     }
+}
+
+.form-message {
+    color: #a12626;
+    font-size: 14px;
+    margin: 12px 0;
+}
+
+.register-link {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #5636a8;
+    font-weight: bold;
+}
+
+.demo-accounts {
+    margin: 14px 0 18px;
+    padding: 12px 14px;
+    border: 1px solid #e1d9f4;
+    border-radius: 8px;
+    background: #f7f3ff;
+    color: #303444;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.demo-accounts h2 {
+    margin-bottom: 5px;
+    font-size: 15px;
 }
