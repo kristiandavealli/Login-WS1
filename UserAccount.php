@@ -9,7 +9,7 @@ $user = current_user();
 
 function cart_id(PDO $pdo, int $userId): int
 {
-    $pdo->prepare('INSERT OR IGNORE INTO carts (user_id) VALUES (?)')->execute([$userId]);
+    $pdo->prepare('INSERT IGNORE INTO carts (user_id) VALUES (?)')->execute([$userId]);
     $statement = $pdo->prepare('SELECT id FROM carts WHERE user_id = ?');
     $statement->execute([$userId]);
     return (int) $statement->fetchColumn();
@@ -41,6 +41,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $pdo->prepare('INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (?, ?, ?)')->execute([$cartId, $productId, $quantity]);
             }
             flash('Item added to cart.');
+        }
+    }
+
+    if ($action === 'buy_now') {
+        $productId = (int) ($_POST['product_id'] ?? 0);
+        $quantity = max(1, (int) ($_POST['quantity'] ?? 1));
+
+        $pdo->beginTransaction();
+        try {
+            $statement = $pdo->prepare('SELECT id, name, price, stock FROM products WHERE id = ? AND is_active = 1 FOR UPDATE');
+            $statement->execute([$productId]);
+            $product = $statement->fetch();
+
+            if (!$product || (int) $product['stock'] < 1) {
+                throw new RuntimeException('This item is unavailable.');
+            }
+            if ($quantity > (int) $product['stock']) {
+                throw new RuntimeException('Not enough stock for ' . $product['name'] . '.');
+            }
+
+            $total = (float) $product['price'] * $quantity;
+            $pdo->prepare('INSERT INTO orders (user_id, total, payment_status, status) VALUES (?, ?, "paid", "pending")')->execute([$user['id'], $total]);
+            $orderId = (int) $pdo->lastInsertId();
+            $pdo->prepare('INSERT INTO order_items (order_id, product_id, product_name, price, quantity) VALUES (?, ?, ?, ?, ?)')
+                ->execute([$orderId, $product['id'], $product['name'], $product['price'], $quantity]);
+            $pdo->prepare('UPDATE products SET stock = stock - ? WHERE id = ?')->execute([$quantity, $product['id']]);
+
+            $pdo->commit();
+            flash('Payment received. Order #' . $orderId . ' has been placed.');
+        } catch (Throwable $exception) {
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            flash($exception->getMessage());
         }
     }
 
@@ -110,12 +144,143 @@ $statement->execute([$user['id']]);
 $orders = $statement->fetchAll();
 $cartTotal = array_sum(array_map(fn (array $item): float => (float) $item['price'] * (int) $item['quantity'], $cart));
 ?><!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>My Shop | Marketly</title><link rel="stylesheet" href="app.css"></head><body>
-<header class="top"><strong>Marketly</strong><nav class="nav"><a href="#shop">Shop</a><a href="#cart">Cart (<?= count($cart) ?>)</a><a href="#orders">My Orders</a><a href="logout.php">Log out</a></nav></header>
-<main class="wrap">
-<?php if ($message = take_flash()): ?><p class="flash"><?= e($message) ?></p><?php endif; ?>
-<h1>Welcome, <?= e($user['username']) ?></h1><p class="muted">Browse items, manage your cart, and track only your own orders.</p>
-<section class="panel" id="shop"><h2>Available Items</h2><div class="grid"><?php foreach ($products as $product): ?><article class="card product"><?php if ($product['image']): ?><img class="product-image" src="<?= e($product['image']) ?>" alt="<?= e($product['name']) ?>"><?php endif; ?><div><h3><?= e($product['name']) ?></h3><p class="muted"><?= e($product['description']) ?></p><p class="price">₱<?= number_format((float) $product['price'], 2) ?></p><small><?= $product['stock'] ?> in stock</small></div><form method="post"><input type="hidden" name="action" value="add_cart"><input type="hidden" name="product_id" value="<?= $product['id'] ?>"><input name="quantity" type="number" min="1" max="<?= $product['stock'] ?>" value="1"><button>Add to cart</button></form></article><?php endforeach; if (!$products): ?><p class="muted">No items available yet.</p><?php endif; ?></div></section>
-<div class="two"><section class="panel" id="cart"><h2>My Cart</h2><?php if ($cart): ?><div class="table-scroll"><table><thead><tr><th>Item</th><th>Price</th><th>Quantity</th><th>Subtotal</th></tr></thead><tbody><?php foreach ($cart as $item): ?><tr><td><?= e($item['name']) ?></td><td>₱<?= number_format((float) $item['price'], 2) ?></td><td><form method="post"><input type="hidden" name="action" value="cart_qty"><input type="hidden" name="item_id" value="<?= $item['id'] ?>"><input name="quantity" type="number" min="0" max="<?= $item['stock'] ?>" value="<?= $item['quantity'] ?>"><button class="small">Update</button></form></td><td>₱<?= number_format((float) $item['price'] * (int) $item['quantity'], 2) ?></td></tr><?php endforeach; ?></tbody></table></div><p><strong>Total: ₱<?= number_format($cartTotal, 2) ?></strong></p><form method="post"><input type="hidden" name="action" value="checkout"><button>Place Order &amp; Pay</button></form><?php else: ?><p class="muted">Your cart is empty.</p><?php endif; ?></section>
-<section class="panel" id="orders"><h2>My Order History</h2><div class="table-scroll"><table><thead><tr><th>Order</th><th>Total</th><th>Payment</th><th>Status</th><th>Date</th></tr></thead><tbody><?php foreach ($orders as $order): ?><tr><td>#<?= $order['id'] ?></td><td>₱<?= number_format((float) $order['total'], 2) ?></td><td><?= e($order['payment_status']) ?></td><td><span class="status"><?= e($order['status']) ?></span></td><td><?= e($order['created_at']) ?></td></tr><?php endforeach; if (!$orders): ?><tr><td colspan="5" class="muted">No orders yet.</td></tr><?php endif; ?></tbody></table></div></section></div>
-</main></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Shop | Marketly</title>
+    <link rel="stylesheet" href="Dashboard.css">
+</head>
+<body>
+    <header class="top">
+        <strong>Marketly</strong>
+        <nav class="nav">
+            <a href="#shop">Shop</a>
+            <a href="#cart">Cart (<?= count($cart) ?>)</a>
+            <a href="#orders">My Orders</a>
+            <a href="logout.php">Log out</a>
+        </nav>
+    </header>
+
+    <main class="wrap">
+        <?php if ($message = take_flash()): ?>
+            <p class="flash"><?= e($message) ?></p>
+        <?php endif; ?>
+
+        <h1>Welcome to Shopping</h1>
+
+        <section class="panel" id="shop">
+            <h2>Available Items</h2>
+            <div class="grid">
+                <?php foreach ($products as $product): ?>
+                    <article class="card product">
+                        <?php if ($product['image'] && is_file(__DIR__ . '/' . $product['image'])): ?>
+                            <img class="product-image" src="<?= e($product['image']) ?>" alt="<?= e($product['name']) ?>">
+                        <?php endif; ?>
+                        <div>
+                            <h3><?= e($product['name']) ?></h3>
+                            <p class="price">&#8369;<?= number_format((float) $product['price'], 2) ?></p>
+                            <small><?= e((string) $product['stock']) ?> in stock</small>
+                        </div>
+                        <form method="post">
+                            <input type="hidden" name="action" value="buy_now">
+                            <input type="hidden" name="product_id" value="<?= e((string) $product['id']) ?>">
+                            <input name="quantity" type="number" min="1" max="<?= e((string) $product['stock']) ?>" value="1">
+                            <button>Buy</button>
+                        </form>
+                    </article>
+                <?php endforeach; ?>
+                <?php if (!$products): ?>
+                    <p class="muted">No items available yet.</p>
+                <?php endif; ?>
+            </div>
+        </section>
+
+        <div class="two">
+            <section class="panel" id="cart">
+                <h2>My Cart</h2>
+                <?php if ($cart): ?>
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($cart as $item): ?>
+                                    <tr>
+                                        <td><?= e($item['name']) ?></td>
+                                        <td>&#8369;<?= number_format((float) $item['price'], 2) ?></td>
+                                        <td>
+                                            <form method="post">
+                                                <input type="hidden" name="action" value="cart_qty">
+                                                <input type="hidden" name="item_id" value="<?= e((string) $item['id']) ?>">
+                                                <input name="quantity" type="number" min="0" max="<?= e((string) $item['stock']) ?>" value="<?= e((string) $item['quantity']) ?>">
+                                                <button class="small">Update</button>
+                                            </form>
+                                        </td>
+                                        <td>&#8369;<?= number_format((float) $item['price'] * (int) $item['quantity'], 2) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p><strong>Total: &#8369;<?= number_format($cartTotal, 2) ?></strong></p>
+                    <form method="post">
+                        <input type="hidden" name="action" value="checkout">
+                        <button>Place Order &amp; Pay</button>
+                    </form>
+                <?php else: ?>
+                    <p class="muted">Your cart is empty.</p>
+                <?php endif; ?>
+            </section>
+
+            <section class="panel" id="orders">
+                <h2>My Order History</h2>
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Total</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($orders as $order): ?>
+                                <tr>
+                                    <td>#<?= e((string) $order['id']) ?></td>
+                                    <td>&#8369;<?= number_format((float) $order['total'], 2) ?></td>
+                                    <td><?= e($order['payment_status']) ?></td>
+                                    <td><span class="status"><?= e($order['status']) ?></span></td>
+                                    <td><?= e($order['created_at']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            <?php if (!$orders): ?>
+                                <tr><td colspan="5" class="muted">No orders yet.</td></tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.flash, .form-message').forEach((notification) => {
+                window.setTimeout(() => {
+                    notification.style.transition = 'opacity 0.35s ease';
+                    notification.style.opacity = '0';
+                    window.setTimeout(() => notification.remove(), 350);
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>
