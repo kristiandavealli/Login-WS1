@@ -6,6 +6,7 @@
 }
 
 body {
+    background: linear-gradient(135deg, #667eea, #6d03d6);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -166,24 +167,14 @@ body {
     display: block;
 }
 
-#staff-choice:checked ~ .divider {
-    display: none;
-}
-
-#staff-choice:checked ~ .admin-choice {
-    display: none;
-}
-
 #admin-choice:checked ~ .admin-form {
     display: block;
 }
 
-#admin-choice:checked ~ .staff-choice {
-    display: none;
-}
-
-#admin-choice:checked ~ .divider {
-    display: none;
+#staff-choice:checked + .staff-choice,
+#admin-choice:checked + .admin-choice {
+    background: #6d4cc7;
+    color: #ffffff;
 }
 
 .footer-links {
