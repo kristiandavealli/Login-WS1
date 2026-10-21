@@ -1,3 +1,2 @@
 <?php
-require __DIR__ . '/auth.php';
-require __DIR__ . '/UserLogin.html';
+require __DIR__ . '/login.php';
