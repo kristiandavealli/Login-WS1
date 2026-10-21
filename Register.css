@@ -6,12 +6,11 @@
 }
 
 body {
+    background: linear-gradient(135deg, #667eea, #6d03d6);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #e0f3fb;
-    color: #333333;
     position: relative;
     isolation: isolate;
 }
@@ -113,6 +112,16 @@ body {
     color: #b91c1c;
     text-align: center;
     font-size: 14px;
+}
+
+.form-message {
+    margin: 0 0 16px;
+    padding: 10px;
+    border-radius: 6px;
+    background: #eeeaff;
+    color: #5636a8;
+    font-size: 14px;
+    text-align: center;
 }
 
 @media (max-width: 600px) {
